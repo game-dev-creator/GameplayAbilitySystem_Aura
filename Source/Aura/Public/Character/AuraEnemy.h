@@ -4,14 +4,30 @@
 
 #include "CoreMinimal.h"
 #include "Character/AuraCharacterBase.h"
+#include "Interaction/EnemyInterface.h"
 #include "AuraEnemy.generated.h"
+
+
 
 /**
  * 
  */
 UCLASS()
-class AURA_API AAuraEnemy : public AAuraCharacterBase
+class AURA_API AAuraEnemy : public AAuraCharacterBase, public IEnemyInterface
 {
 	GENERATED_BODY()
+
+
+public:
+
+	AAuraEnemy(); // Add Definition in AuraEnemy.cpp
+
+	virtual void HighlightActor() override; // Add Definition in AuraEnemy.cpp
+
+	virtual void UnHighlightActor() override; // Add Definition in AuraEnemy.cpp
+
+
+	// UPROPERTY(BlueprintReadOnly)
+	// bool bHighlighted = false;
 	
 };

@@ -1,0 +1,23 @@
+[33mcommit 437c3670831f55672ffff7c219382af9471a644a[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m)[m
+Author: game-dev-creator <forev3rgamedev@gmail.com>
+Date:   Sat Jan 13 22:28:29 2024 +0200
+
+    Aura Player Controller And Movement Input
+
+[33mcommit 9f6a9c754a70ba06bfb20769ee31276d4735840c[m[33m ([m[1;31morigin/main[m[33m)[m
+Author: game-dev-creator <forev3rgamedev@gmail.com>
+Date:   Wed Jan 10 21:34:57 2024 +0200
+
+    The Player And Enemy Characters
+
+[33mcommit 179200e2e5fbe5cdb1134d6d92c7dcd46055fde9[m
+Author: game-dev-creator <forev3rgamedev@gmail.com>
+Date:   Mon Dec 18 18:53:38 2023 +0200
+
+    The Base Character Class
+
+[33mcommit b0b3d660d0684dd0fa1dba4398add1bdeaed8da6[m
+Author: game-dev-creator <forev3rgamedev@gmail.com>
+Date:   Mon Dec 11 20:32:17 2023 +0200
+
+    Initial Project Files

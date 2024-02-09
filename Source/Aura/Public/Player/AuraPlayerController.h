@@ -13,6 +13,8 @@ class UInputAction;
 
 struct FInputActionValue;
 
+class IEnemyInterface;
+
 
 /**
  * 
@@ -25,6 +27,8 @@ class AURA_API AAuraPlayerController : public APlayerController
 public:
 
 	AAuraPlayerController(); // Add Definition in AuraPlayerController.cpp 
+
+	virtual void PlayerTick(float DeltaTime) override; // Add Definition in AuraPlayerController.cpp 
 
 
 protected:
@@ -44,4 +48,11 @@ private:
 
 
 	void Move(const FInputActionValue& InputActionValue); // Add Definition in AuraPlayerController.cpp 
+
+	void CursorTrace(); // Add Definition in AuraPlayerController.cpp
+
+
+	IEnemyInterface* LastActor;
+
+	IEnemyInterface* ThisActor;
 };
