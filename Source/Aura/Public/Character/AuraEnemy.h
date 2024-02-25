@@ -22,9 +22,19 @@ public:
 
 	AAuraEnemy(); // Add Definition in AuraEnemy.cpp
 
+
+	/** Enemy Interface */
+
 	virtual void HighlightActor() override; // Add Definition in AuraEnemy.cpp
 
 	virtual void UnHighlightActor() override; // Add Definition in AuraEnemy.cpp
+
+	/** End Enemy Interface */
+
+
+protected:
+
+	virtual void BeginPlay() override; // Add Definition in AuraEnemy.cpp
 
 
 	// UPROPERTY(BlueprintReadOnly)
