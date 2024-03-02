@@ -18,7 +18,7 @@ class AURA_API UAuraUserWidget : public UUserWidget
 public:
 
 
-	UFUNCTION(BlueprintReadOnly)
+	UFUNCTION(BlueprintCallable)
 	void SetWidgetController(UObject* InWidgetController); // Add Definition in AuraUserWidget.cpp
 
 
