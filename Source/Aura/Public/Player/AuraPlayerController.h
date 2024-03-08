@@ -52,7 +52,7 @@ private:
 	void CursorTrace(); // Add Definition in AuraPlayerController.cpp
 
 
-	IEnemyInterface* LastActor;
+	TObjectPtr<IEnemyInterface> LastActor;
 
-	IEnemyInterface* ThisActor;
+	TObjectPtr <IEnemyInterface> ThisActor;
 };
