@@ -54,6 +54,8 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void SetWidgetControllerParams(const FWidgetControllerParams& WCParams); // Add Definition in AuraWidgetController.cpp
 
+	virtual void BroadcastInitialValues(); // Add Definition in AuraWidgetController.cpp
+
 
 protected:
 
