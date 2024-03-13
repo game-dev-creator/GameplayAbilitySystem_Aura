@@ -56,6 +56,8 @@ public:
 
 	virtual void BroadcastInitialValues(); // Add Definition in AuraWidgetController.cpp
 
+	virtual void BindCallbacksToDependencies(); // Add Definition in AuraWidgetController.cpp
+
 
 protected:
 
