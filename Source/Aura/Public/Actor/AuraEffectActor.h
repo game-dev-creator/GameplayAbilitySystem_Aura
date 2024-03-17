@@ -7,7 +7,9 @@
 #include "AuraEffectActor.generated.h"
 
 
-class USphereComponent;
+class UGameplayEffect;
+
+// class USphereComponent;
 
 
 UCLASS()
@@ -20,17 +22,25 @@ public:
 	AAuraEffectActor();
 
 
-	UFUNCTION()
+	/*UFUNCTION()
 	virtual void OnOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OrherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult); // Add Definition in AuraEffectActor.cpp
 
 
 	UFUNCTION()
-	virtual void EndOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex); // Add Definition in AuraEffectActor.cpp
+	virtual void EndOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex); // Add Definition in AuraEffectActor.cpp */
 
 
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
+
+
+	UFUNCTION(BlueprintCallable)
+	void ApplyEffectToTarget(AActor* Target, TSubclassOf<UGameplayEffect> GameplayEffectClass); // Add Definition in AuraEffectActor.cpp
+
+
+	UPROPERTY(EditAnywhere, Category = "Applied Effects")
+	TSubclassOf<UGameplayEffect> InstantGameplayEffectClass;
 
 public:	
 	// Called every frame
@@ -38,10 +48,10 @@ public:
 
 private:
 
-	UPROPERTY(VisibleAnywhere)
+	/*UPROPERTY(VisibleAnywhere)
 	TObjectPtr<USphereComponent> Sphere;
 
 
 	UPROPERTY(VisibleAnywhere)
-	TObjectPtr<UStaticMeshComponent> Mesh;
+	TObjectPtr<UStaticMeshComponent> Mesh;*/
 };

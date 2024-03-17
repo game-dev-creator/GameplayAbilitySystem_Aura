@@ -5,8 +5,11 @@
 
 #include "AbilitySystemComponent.h"
 #include <AbilitySystemInterface.h>
+#include <AbilitySystemBlueprintLibrary.h>
+#include "AbilitySystem/AuraAbilitySystemComponent.h"
 #include "AbilitySystem/AuraAttributeSet.h"
 #include "Components/SphereComponent.h"
+
 
 
 // Sets default values
@@ -16,17 +19,20 @@ AAuraEffectActor::AAuraEffectActor()
 	PrimaryActorTick.bCanEverTick = false;
 
 
-	Mesh = CreateDefaultSubobject<UStaticMeshComponent>("Mesh");
+	SetRootComponent(CreateDefaultSubobject<USceneComponent>("SceneRoot"));
+
+
+	/* Mesh = CreateDefaultSubobject<UStaticMeshComponent>("Mesh");
 
 	SetRootComponent(Mesh);
 
 
 	Sphere = CreateDefaultSubobject<USphereComponent>("Sphere");
 
-	Sphere->SetupAttachment(GetRootComponent());
+	Sphere->SetupAttachment(GetRootComponent());*/
 }
 
-void AAuraEffectActor::OnOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OrherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
+/*void AAuraEffectActor::OnOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OrherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 
 	// TODO: Change This To Apply A Gameplay Effect. For Now, Using const_cast As A Hack!
 {
@@ -46,16 +52,43 @@ void AAuraEffectActor::OnOverlap(UPrimitiveComponent* OverlappedComponent, AActo
 
 void AAuraEffectActor::EndOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
 {
-}
+} */
 
 // Called when the game starts or when spawned
 void AAuraEffectActor::BeginPlay()
 {
 	Super::BeginPlay();
 
-	Sphere->OnComponentBeginOverlap.AddDynamic(this, &AAuraEffectActor::OnOverlap);
+	/*Sphere->OnComponentBeginOverlap.AddDynamic(this, &AAuraEffectActor::OnOverlap);
 
-	Sphere->OnComponentEndOverlap.AddDynamic(this, &AAuraEffectActor::EndOverlap);
+	Sphere->OnComponentEndOverlap.AddDynamic(this, &AAuraEffectActor::EndOverlap);*/
+}
+
+void AAuraEffectActor::ApplyEffectToTarget(AActor* Target, TSubclassOf<UGameplayEffect> GameplayEffectClass)
+{	
+	UAbilitySystemComponent* TargetAbilitySystemComponent = UAbilitySystemBlueprintLibrary::GetAbilitySystemComponent(Target); // Option 2
+
+	if (TargetAbilitySystemComponent == nullptr)
+	{
+		return;
+	}
+
+	check(GameplayEffectClass);
+
+	FGameplayEffectContextHandle EffectContextHandle = TargetAbilitySystemComponent->MakeEffectContext();
+
+	EffectContextHandle.AddSourceObject(this);
+
+	FGameplayEffectSpecHandle EffectSpectHandle = TargetAbilitySystemComponent->MakeOutgoingSpec(GameplayEffectClass, 1.f, EffectContextHandle);
+
+	TargetAbilitySystemComponent->ApplyGameplayEffectSpecToSelf(*EffectSpectHandle.Data.Get());
+	
+	/*IAbilitySystemInterface* ASCInterface = Cast<IAbilitySystemInterface>(Target); // Option 1 - Implementing The Interface To All The Actors
+
+	if (ASCInterface) // Option 1 - Implementing The Interface To All The Actors
+	{
+		ASCInterface->GetAbilitySystemComponent(); // Option 1 - Implementing The Interface To All The Actors	
+	}*/
 }
 
 // Called every frame
