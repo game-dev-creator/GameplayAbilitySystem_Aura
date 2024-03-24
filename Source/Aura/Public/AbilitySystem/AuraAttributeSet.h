@@ -15,6 +15,49 @@
  	GAMEPLAYATTRIBUTE_VALUE_INITTER(PropertyName)
 
 
+USTRUCT()
+struct FEffectProperties
+{
+	GENERATED_BODY()
+
+	FEffectProperties(){}
+
+	FGameplayEffectContextHandle EffectContextHandle;
+
+	UPROPERTY()
+	UAbilitySystemComponent* SourceAbilitySystemComponent = nullptr;
+
+
+	UPROPERTY()
+	AActor* SourceAvatarActor = nullptr;
+
+
+	UPROPERTY()
+	AController* SourceController = nullptr;
+
+
+	UPROPERTY()
+	ACharacter* SourceCharacter = nullptr;
+
+
+
+	UPROPERTY()
+	UAbilitySystemComponent* TargetAbilitySystemComponent = nullptr;
+
+
+	UPROPERTY()
+	AActor* TargetAvatarActor = nullptr;
+
+
+	UPROPERTY()
+	AController* TargetController = nullptr;
+
+
+	UPROPERTY()
+	ACharacter* TargetCharacter = nullptr;
+};
+
+
 /**
  * 
  */
@@ -32,6 +75,9 @@ public:
 
 
 	virtual void PreAttributeChange(const FGameplayAttribute& Attribute, float& NewValue) override; // Add Definition in AuraAttributeSet.cpp
+
+
+	virtual void PostGameplayEffectExecute(const FGameplayEffectModCallbackData& Data) override; // Add Definition in AuraAttributeSet.cpp
 
 
 	UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_Health, Category = "Vital Attributes")
@@ -76,4 +122,9 @@ public:
 
 	UFUNCTION()
 	void OnRep_MaxMana(const FGameplayAttributeData& OldMaxMana) const; // Add Definition in AuraAttributeSet.cpp
+
+
+private:
+
+	void SetEffectProperties(const FGameplayEffectModCallbackData& Data, FEffectProperties& Props) const; // Add Definition in AuraAttributeSet.cpp
 };
