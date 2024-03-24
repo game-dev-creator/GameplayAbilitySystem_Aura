@@ -31,6 +31,9 @@ public:
 	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override; // Add Definition in AuraAttributeSet.cpp
 
 
+	virtual void PreAttributeChange(const FGameplayAttribute& Attribute, float& NewValue) override; // Add Definition in AuraAttributeSet.cpp
+
+
 	UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_Health, Category = "Vital Attributes")
 	FGameplayAttributeData Health;
 
