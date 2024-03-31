@@ -37,6 +37,9 @@ protected:
 	virtual void BeginPlay() override; // Add Definition in AuraEnemy.cpp
 
 
+	virtual void InitAbilityActorInfo() override; // Add Definition in AuraEnemy.cpp
+
+
 	// UPROPERTY(BlueprintReadOnly)
 	// bool bHighlighted = false;
 	

@@ -45,6 +45,9 @@ protected:
 	UPROPERTY()
 	TObjectPtr<UAttributeSet> AttributeSet;
 
+
+	virtual void InitAbilityActorInfo(); // Add Definition in AuraCharacterBase.cpp
+
 /* public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;

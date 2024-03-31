@@ -79,14 +79,14 @@ void AAuraEffectActor::ApplyEffectToTarget(AActor* TargetActor, TSubclassOf<UGam
 
 	EffectContextHandle.AddSourceObject(this);
 
-	const FGameplayEffectSpecHandle EffectSpectHandle = TargetAbilitySystemComponent->MakeOutgoingSpec(GameplayEffectClass, 1.f, EffectContextHandle);
+	const FGameplayEffectSpecHandle EffectSpectHandle = TargetAbilitySystemComponent->MakeOutgoingSpec(GameplayEffectClass, ActorLevel, EffectContextHandle);
 
 	const FActiveGameplayEffectHandle ActiveEffectHandle = TargetAbilitySystemComponent->ApplyGameplayEffectSpecToSelf(*EffectSpectHandle.Data.Get());
 
 
 	const bool bIsInfinite = EffectSpectHandle.Data.Get()->Def.Get()->DurationPolicy == EGameplayEffectDurationType::Infinite;
 
-	if (bIsInfinite && InfiniteEffectApplicationPolicy == EEffectApplicationPolicy::ApplyOnOverlap)
+	if (bIsInfinite && InfiniteEffectRemovalPolicy == EEffectRemovalPolicy::RemoveOnEndOverlap)
 	{
 		ActiveEffectHandles.Add(ActiveEffectHandle, TargetAbilitySystemComponent);
 	}
@@ -108,7 +108,7 @@ void AAuraEffectActor::OnOverlap(AActor* TargetActor)
 
 	if (DurationEffectApplicationPolicy == EEffectApplicationPolicy::ApplyOnOverlap)
 	{
-		ApplyEffectToTarget(TargetActor, InstantGameplayEffectClass);
+		ApplyEffectToTarget(TargetActor, DurationGameplayEffectClass);
 	}
 
 	if (InfiniteEffectApplicationPolicy == EEffectApplicationPolicy::ApplyOnOverlap)
@@ -126,7 +126,12 @@ void AAuraEffectActor::OnEndOverlap(AActor* TargetActor)
 
 	if (DurationEffectApplicationPolicy == EEffectApplicationPolicy::ApplyOnEndOverlap)
 	{
-		ApplyEffectToTarget(TargetActor, InstantGameplayEffectClass);
+		ApplyEffectToTarget(TargetActor, DurationGameplayEffectClass);
+	}
+
+	if (InfiniteEffectApplicationPolicy == EEffectApplicationPolicy::ApplyOnEndOverlap)
+	{
+		ApplyEffectToTarget(TargetActor, InfiniteGameplayEffectClass);
 	}
 
 	if (InfiniteEffectRemovalPolicy == EEffectRemovalPolicy::RemoveOnEndOverlap)
@@ -140,7 +145,7 @@ void AAuraEffectActor::OnEndOverlap(AActor* TargetActor)
 
 		TArray<FActiveGameplayEffectHandle> HandlesToRemove;
 
-		/*for (TTuple<FActiveGameplayEffectHandle, UAbilitySystemComponent*> HandlePair : ActiveEffectHandles) // Option 1
+		for (TTuple<FActiveGameplayEffectHandle, UAbilitySystemComponent*> HandlePair : ActiveEffectHandles) // Option 1
 		{
 			if (TargetAbilitySystemComponent == HandlePair.Value)
 			{
@@ -148,8 +153,9 @@ void AAuraEffectActor::OnEndOverlap(AActor* TargetActor)
 
 				HandlesToRemove.Add(HandlePair.Key);
 			}
-		}*/
-		for (auto HandlePair = ActiveEffectHandles.CreateIterator(); HandlePair; ++HandlePair) // Option 2
+		}
+
+		/*for (auto HandlePair = ActiveEffectHandles.CreateIterator(); HandlePair; ++HandlePair) // Option 2
 		{
 			if (TargetAbilitySystemComponent == HandlePair->Value)
 			{
@@ -157,7 +163,7 @@ void AAuraEffectActor::OnEndOverlap(AActor* TargetActor)
 
 				HandlePair.RemoveCurrent();
 			}
-		}
+		}*/
 
 
 		for (FActiveGameplayEffectHandle& Handle : HandlesToRemove)

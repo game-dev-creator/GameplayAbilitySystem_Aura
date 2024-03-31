@@ -25,5 +25,5 @@ public:
 
 private:
 
-	void InitAbilityActorInfo(); // Add Definition in AuraCharacter.cpp
+	virtual void InitAbilityActorInfo() override; // Add Definition in AuraCharacter.cpp
 };

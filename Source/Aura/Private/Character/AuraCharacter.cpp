@@ -53,6 +53,8 @@ void AAuraCharacter::InitAbilityActorInfo()
 
 	AuraPlayerState->GetAbilitySystemComponent()->InitAbilityActorInfo(AuraPlayerState, this);
 
+	Cast<UAuraAbilitySystemComponent>(AuraPlayerState->GetAbilitySystemComponent())->AbilityActorInfoSet();
+
 	AbilitySystemComponent = AuraPlayerState->GetAbilitySystemComponent();
 
 	AttributeSet = AuraPlayerState->GetAttributeSet();

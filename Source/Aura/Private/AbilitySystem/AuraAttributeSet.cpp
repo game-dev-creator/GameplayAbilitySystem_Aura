@@ -42,7 +42,7 @@ void UAuraAttributeSet::PreAttributeChange(const FGameplayAttribute& Attribute, 
 	{
 		NewValue = FMath::Clamp(NewValue, 0.f, GetMaxHealth());
 
-		// UE_LOG(LogTemp, Warning, TEXT("Health: %f"), NewValue);
+		UE_LOG(LogTemp, Warning, TEXT("Health: %f"), NewValue);
 	}
 
 
