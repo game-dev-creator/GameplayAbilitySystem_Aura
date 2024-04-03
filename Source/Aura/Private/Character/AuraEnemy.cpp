@@ -48,7 +48,7 @@ void AAuraEnemy::UnHighlightActor()
 
 void AAuraEnemy::BeginPlay()
 {
-	// Super:BeginPlay();
+	Super::BeginPlay();
 
 	// check(AbilitySystemComponent);
 
