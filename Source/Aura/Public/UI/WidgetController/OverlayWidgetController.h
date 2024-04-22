@@ -88,4 +88,25 @@ protected:
 	void ManaChanged(const FOnAttributeChangeData& Data) const; // Add Definition in OverlayWidgetController.cpp
 
 	void MaxManaChanged(const FOnAttributeChangeData& Data) const; // Add Definition in OverlayWidgetController.cpp
+
+
+	template<typename T>
+	T* GetDataTebaleRowByTag(UDataTable* DataTable, const FGameplayTag& Tag); // Add Definition in OverlayWidgetController.h
 };
+
+template<typename T>
+inline T* UOverlayWidgetController::GetDataTebaleRowByTag(UDataTable* DataTable, const FGameplayTag& Tag)
+{
+	return DataTable->FindRow<T>(Tag.GetTagName(), TEXT("")); // Option 3
+
+	/* T Row = DataTable->FindRow<T>(Tag.GetTagName(), TEXT("")); // Option 2
+
+	return Row; // Option 2 */
+
+	/* if (Row)
+	{
+		return Row;
+	}
+
+	return nullptr; // Option 1 */
+}
