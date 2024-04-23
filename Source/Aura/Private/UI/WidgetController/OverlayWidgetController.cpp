@@ -40,14 +40,26 @@ void UOverlayWidgetController::BindCallbacksToDependencies()
 		{
 			for (const FGameplayTag& Tag : AssetTags) // Cut From AuraAbilitySystemComponent.cpp:
 			{
+				// For Example, Say That Tag = Message.HealthPotion
+
+				// "A.1".MatchesTag ("A") Will Return True, "A".MatchesTag("A.1") Will Return False
+				
+				// "Message.HealthPotion".MatchesTag ("Message") Will Return True, "Message".MatchesTag("Message.HealthPotion") Will Return False
+
+				FGameplayTag MessageTag = FGameplayTag::RequestGameplayTag(FName("Message"));
+
+				if (Tag.MatchesTag(MessageTag))
+				{
+					const FUIWidgetRow* Row = GetDataTebaleRowByTag<FUIWidgetRow>(MessageWidgetDataTable, Tag);
+
+					MessgaeWidgetRowDelegate.Broadcast(*Row);
+				}
+
 				//TODO: Broadcast the tag To The Widaget Controller
 
-				const FString Msg = FString::Printf(TEXT("GE Tag: %s"), *Tag.ToString());
+				/* const FString Msg = FString::Printf(TEXT("GE Tag: %s"), *Tag.ToString());
 
-				GEngine->AddOnScreenDebugMessage(-1, 8.f, FColor::Blue, Msg);
-
-
-				FUIWidgetRow* Row = GetDataTebaleRowByTag<FUIWidgetRow>(MessageWidgetDataTable, Tag);
+				GEngine->AddOnScreenDebugMessage(-1, 8.f, FColor::Blue, Msg); */
 			}
 		}
     );
