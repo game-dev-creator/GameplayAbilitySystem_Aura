@@ -34,17 +34,20 @@ struct FUIWidgetRow : public FTableRowBase
 class UAuraUserWidget;
 
 
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnHealtChangedSignature, float, NewHealth);
-
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnMaxHealtChangedSignature, float, NewMaxHealth);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnAttributeChangedSignature, float, NewValue); // Option 2
 
 
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnManaChangedSignature, float, NewMana);
+/* DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnHealtChangedSignature, float, NewHealth); // Option 1
 
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnMaxManaChangedSignature, float, NewMaxMana);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnMaxHealtChangedSignature, float, NewMaxHealth); // Option 1
 
 
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FMessageWidgetRowSignature, FUIWidgetRow, Row);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnManaChangedSignature, float, NewMana); // Option 1
+
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnMaxManaChangedSignature, float, NewMaxMana); // Option 1 */
+
+
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FMessageWidgetRowSignature, FUIWidgetRow, Row); 
 
 
 /**
@@ -64,23 +67,33 @@ public:
 
 
 	UPROPERTY(BlueprintAssignable, Category = "GAS|Attributes")
-	FOnHealtChangedSignature OnHealthChanged;
+	// FOnHealtChangedSignature OnHealthChanged; // Option 1
+
+	FOnAttributeChangedSignature OnHealthChanged; // Option 2
 
 
 	UPROPERTY(BlueprintAssignable, Category = "GAS|Attributes")
-	FOnMaxHealtChangedSignature OnMaxHealthChanged;
+	// FOnMaxHealtChangedSignature OnMaxHealthChanged; // Option 1
+
+	FOnAttributeChangedSignature OnMaxHealthChanged; // Option 2
 
 
 	UPROPERTY(BlueprintAssignable, Category = "GAS|Attributes")
-	FOnManaChangedSignature OnManaChanged;
+	// FOnManaChangedSignature OnManaChanged; // Option 1
+
+	FOnAttributeChangedSignature OnManaChanged; // Option 2
 
 
 	UPROPERTY(BlueprintAssignable, Category = "GAS|Attributes")
-	FOnMaxManaChangedSignature OnMaxManaChanged;
+	// FOnMaxManaChangedSignature OnMaxManaChanged; // Option 1
+
+	FOnAttributeChangedSignature OnMaxManaChanged; // Option 2
 
 
 	UPROPERTY(BlueprintAssignable, Category = "GAS|Messages")
 	FMessageWidgetRowSignature MessgaeWidgetRowDelegate; 
+
+	
 
 
 protected:
@@ -88,14 +101,14 @@ protected:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Widget Data")
 	TObjectPtr<UDataTable> MessageWidgetDataTable;
 
-	void HealthChanged(const FOnAttributeChangeData& Data) const; // Add Definition in OverlayWidgetController.cpp
+	// void HealthChanged(const FOnAttributeChangeData& Data) const; // Add Definition in OverlayWidgetController.cpp - Option 1
 
-	void MaxHealthChanged(const FOnAttributeChangeData& Data) const; // Add Definition in OverlayWidgetController.cpp
+	// void MaxHealthChanged(const FOnAttributeChangeData& Data) const; // Add Definition in OverlayWidgetController.cpp - Option 1
 
 
-	void ManaChanged(const FOnAttributeChangeData& Data) const; // Add Definition in OverlayWidgetController.cpp
+	// void ManaChanged(const FOnAttributeChangeData& Data) const; // Add Definition in OverlayWidgetController.cpp - Option 1
 
-	void MaxManaChanged(const FOnAttributeChangeData& Data) const; // Add Definition in OverlayWidgetController.cpp
+	// void MaxManaChanged(const FOnAttributeChangeData& Data) const; // Add Definition in OverlayWidgetController.cpp - Option 1
 
 
 	template<typename T>
