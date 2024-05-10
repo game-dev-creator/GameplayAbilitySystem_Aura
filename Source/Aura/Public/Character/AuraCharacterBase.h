@@ -62,5 +62,18 @@ protected:
 	TSubclassOf<UGameplayEffect> DefaultPrimaryAttributes; 
 
 
-	void InitializePrimaryAttributes() const; // Add Definition in AuraCharacterBase.cpp
+	UPROPERTY(BlueprintReadOnly, EditAnywhere, Category = "Attributes")
+	TSubclassOf<UGameplayEffect> DefaultSecondaryAttributes;
+
+
+	void ApplyEffectToSelf(TSubclassOf<UGameplayEffect> GameplayEffectClass, float Level) const; // Add Definition in AuraCharacterBase.cpp
+
+
+	void InitializeDefaultAttributes() const; // Add Definition in AuraCharacterBase.cpp
+
+
+	/* void InitializePrimaryAttributes() const; // Add Definition in AuraCharacterBase.cpp
+
+
+	void InitializeSecondaryAttributes() const; // Add Definition in AuraCharacterBase.cpp */
 };
