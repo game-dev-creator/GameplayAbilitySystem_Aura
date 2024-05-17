@@ -23,6 +23,15 @@ public:
 	virtual void OnRep_PlayerState() override;	// Add Definition in AuraCharacter.cpp
 
 
+	/** Combat Interface*/
+
+
+	virtual int32 GetPlayerLevel() override; // Add Definition in AuraCharacter.cpp
+
+
+	/** End Combat Interface*/
+
+
 private:
 
 	virtual void InitAbilityActorInfo() override; // Add Definition in AuraCharacter.cpp

@@ -32,6 +32,15 @@ public:
 	/** End Enemy Interface */
 
 
+	/** Combat Interface */
+
+
+	virtual int32 GetPlayerLevel() override; // Add Definition in AuraEnemy.cpp
+
+
+	/** End Combat Interface */
+
+
 protected:
 
 	virtual void BeginPlay() override; // Add Definition in AuraEnemy.cpp
@@ -40,7 +49,10 @@ protected:
 	virtual void InitAbilityActorInfo() override; // Add Definition in AuraEnemy.cpp
 
 
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Character Class Defaults")
+	int32 Level = 1;
+
+
 	// UPROPERTY(BlueprintReadOnly)
-	// bool bHighlighted = false;
-	
+	// bool bHighlighted = false;	
 };
