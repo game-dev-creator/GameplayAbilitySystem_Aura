@@ -6,6 +6,13 @@
 #include "UI/WidgetController/AuraWidgetController.h"
 #include "AttributeMenuWidgetController.generated.h"
 
+
+class UAttributeInfo;
+
+struct FAuraAttributeInfo;
+
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FAttributeInfoSiganture, const FAuraAttributeInfo&, Info);
+
 /**
  * 
  */
@@ -19,5 +26,16 @@ public:
 	virtual void BindCallbacksToDependencies() override; // Add Definition in AttributeMenuWidgetController.cpp
 
 	virtual void BroadcastInitialValues() override; // Add Definition in AttributeMenuWidgetController.cpp
+
+
+	UPROPERTY(BlueprintAssignable, Category="GAS|Attributes")
+	FAttributeInfoSiganture AttributeInfoDelegate;
+
+
+protected:
+
+
+	UPROPERTY(EditDefaultsOnly)
+	TObjectPtr<UAttributeInfo> AttributeInfo;
 	
 };
