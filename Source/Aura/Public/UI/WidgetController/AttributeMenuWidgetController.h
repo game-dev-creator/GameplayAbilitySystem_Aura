@@ -13,5 +13,11 @@ UCLASS()
 class AURA_API UAttributeMenuWidgetController : public UAuraWidgetController
 {
 	GENERATED_BODY()
+
+public:
+
+	virtual void BindCallbacksToDependencies() override; // Add Definition in AttributeMenuWidgetController.cpp
+
+	virtual void BroadcastInitialValues() override; // Add Definition in AttributeMenuWidgetController.cpp
 	
 };
