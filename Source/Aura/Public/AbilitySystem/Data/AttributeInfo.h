@@ -22,6 +22,10 @@ struct FAuraAttributeInfo
 	FText AttributeName = FText();
 
 
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
+	FText AttributeDescription = FText();
+
+
 	UPROPERTY(BlueprintReadOnly)
 	float AttributeValue = 0.f;
 };
@@ -38,6 +42,6 @@ public:
 
 	FAuraAttributeInfo FindAttributeInfoForTag(const FGameplayTag& AttributeTag, bool bLogNotFound = false) const; // Add Definition in AttributeInfo.cpp
 
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, meta = (TitleProperty = "{AttributeName}"))
 	TArray<FAuraAttributeInfo> AttributeInformation;
 };
